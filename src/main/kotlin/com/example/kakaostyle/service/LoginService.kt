@@ -15,6 +15,10 @@ class LoginService(@Autowired private val customLoginDao: CustomLoginDao) {
             else throw Exception("Email or Password is not valid")
         }
         else throw Exception("Name cannot contains non alphabet characters")
+    }
+    fun TokenExchange(accessToken: String?): User? {
+        accessToken ?: return null
+        return customLoginDao.findByAccessToken(accessToken) ?: throw Exception("Unauthorized")
 
     }
 
